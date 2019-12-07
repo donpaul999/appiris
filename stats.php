@@ -49,7 +49,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		text: title_s
 	},
 	axisY:{
-		includeZero: false
+		includeZero: true
 	},
 	data: [{
 		type: "line",
@@ -87,7 +87,7 @@ chart.render();
         }
     }
 ?>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
