@@ -1,6 +1,6 @@
 <?php
    require 'run.php';
-   run();
+   run($trainNames, $trainValues);
 
 ?>
 

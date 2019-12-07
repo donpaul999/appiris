@@ -31,6 +31,7 @@
            // only if text present remember
            if (trim($text) != '') $texts[] = $text;
          }
+         //DATE FIX
         $mod = $texts[17];
         $aux1 = $mod[0];
         $aux2 = $mod[1];
@@ -39,6 +40,10 @@
         $mod[3] = $aux1;
         $mod[4] = $aux2;
         $texts[17] = $mod;
+
+        //RANG FIX
+        $texts[5] = preg_replace('/\s+/', '',$texts[5]);
+
         $trainName=["ID", $texts[4], $texts[6], $texts[8], $texts[10], $texts[12], $texts[14], $texts[16], $texts[18]];
         $trainValues=[$nrTren, $texts[5], $texts[7], $texts[9], $texts[11], $texts[13], $texts[15], $texts[17], $texts[19]];
         if(strpos($texts[13],"destinatie") != null){
