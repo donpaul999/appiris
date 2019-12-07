@@ -2,7 +2,7 @@
     function process_list(&$array){
         $file="trains.txt";
 
-        $fopen = fopen($file, r);
+        $fopen = fopen($file, 'r');
 
         $fread = fread($fopen,filesize($file));
 
