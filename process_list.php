@@ -1,6 +1,6 @@
 <?php
     function process_list(&$array){
-        $file="trains.txt";
+        $file = "trains.txt";
 
         $fopen = fopen($file, 'r');
 
@@ -18,6 +18,7 @@
         foreach ($split as $string)
         {
             array_push($array,$string);
+            //echo $string;
         }
 
     }

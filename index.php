@@ -1,17 +1,9 @@
 <?php
-
-    include('script.php');
-    include('process_list.php');
-    process_list($list_trains);
-    //print_r($list_trains);
-    $size = count($list_trains);
-    for($i = 1; $i < $size; ++$i){
-        TrainCharac($list_trains[$i], $trainName, $trainValues);
-        //print_r($trainName);
-        //print_r($trainValues);
-    }
+   require 'run.php';
+   run();
 
 ?>
+
 <!DOCTYPE html>
         <html>
         <head>
@@ -74,7 +66,9 @@
         //moveBus();
         </script>
 
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=AIzaSyB-W_sLy7VzaQNdckkY4V5r980wDR9ldP4"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzsHJCRvRVs4ID9uESwftPaB3s9KPjSmLDsKYI"></script>
+
+        //<script src="http://maps.googleapis.com/maps/api/js?sensor=AIzaSyB-W_sLy7VzaQNdckkY4V5r980wDR9ldP4"></script>
         <div id="map-canvas" style="height: 500px; width: 500px;"></div>
 
 
