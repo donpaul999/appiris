@@ -4,4 +4,4 @@
 This project is meant to practice web scrapping. This is the website where I got data from https://appiris.infofer.ro (it is a little bit a mess for webscraping).
 <br> </br>
 
-![alt text](https://i.imgur.com/sFBt6ic.png)
+![alt text](https://i.imgur.com/JAjCio8.png)
