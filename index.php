@@ -61,7 +61,7 @@
 
         </script>
         </head>
-        <script id='gm' async defer src="//maps.google.com/maps/api/js?key=AIzaSyB8jq3tShhIsvoJo4h08lGoVRFFqhKuJCQ&region=en-GB&language=en"></script>
+        <script id='gm' async defer src="//maps.google.com/maps/api/js?key=KeyQ&region=en-GB&language=en"></script>
 
         <body onload="initialize()">
         <script type="text/javascript">

@@ -44,6 +44,7 @@
             $result = mysqli_query($conectare, $sql);
         }
     }
+    
     function select_delays($id, $data){
         global $conectare;
         $txt = $data;
