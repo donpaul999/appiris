@@ -19,7 +19,6 @@
         width: 500px;
         }
         </style>
-
    </script>
         <script type="text/javascript">
         function initialize() {
@@ -50,25 +49,26 @@
 
         function moveBus( map, marker ) {
             setTimeout(() => {
-                marker.setPosition( new google.maps.LatLng( 44.56718739999999, 26.0835113 ) );
+                lat = 44.56718739999999;
+                long = 26.0835113;
+                var position = new google.maps.LatLng(lat, long);
+                marker.setPosition(position);
                 map.panTo( new google.maps.LatLng( 44.56297439999999, 25.9388214 ) );
-            }, 1)
+             }, 1)
 
         };
 
 
-
         </script>
         </head>
+        <script id='gm' async defer src="//maps.google.com/maps/api/js?key=AIzaSyB8jq3tShhIsvoJo4h08lGoVRFFqhKuJCQ&region=en-GB&language=en"></script>
 
         <body onload="initialize()">
         <script type="text/javascript">
-        //moveBus();
+        moveBus();
         </script>
 
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzsHJCRvRVs4ID9uESwftPaB3s9KPjSmLDsKYI"></script>
 
-        //<script src="http://maps.googleapis.com/maps/api/js?sensor=AIzaSyB-W_sLy7VzaQNdckkY4V5r980wDR9ldP4"></script>
         <div id="map-canvas" style="height: 500px; width: 500px;"></div>
 
 

@@ -47,7 +47,7 @@
         $trainName=["ID", $texts[4], $texts[6], $texts[8], $texts[10], $texts[12], $texts[14], $texts[16], $texts[18]];
         $trainValues=[$nrTren, $texts[5], $texts[7], $texts[9], $texts[11], $texts[13], $texts[15], $texts[17], $texts[19]];
         if(strpos($texts[13],"destinatie") != null){
-             remove_delay($nrTren);
+             remove_delay($nrTren, $texts[17]);
              //echo $nrTren;
              array_push($trainName, $texts[20], $texts[21], $texts[22], $texts[23], $texts[24], $texts[26]);
              array_push($trainValues, " ", " ", " ", " ", $texts[25], $texts[27]);
