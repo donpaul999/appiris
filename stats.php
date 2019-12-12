@@ -1,13 +1,15 @@
 <?php
     require 'conectare.php';
-    require 'run.php';
-    include_once('process_db.php');
+    include_once('process_list.php');
+    include_once('script.php');
     date_default_timezone_get();
+    $date_def = date('m/d/Y', time());
     $date = date('m/d/Y', time());
     $trainName = [];
     $trainValues = [];
     $train = 0;
-    $list_trains = run($trainName, $trainValues);
+    process_list($list_trains);
+    //print_r($list_trains);
     $size = count($list_trains);
     $data = [];
     if(isset($_POST['NRT'])){
@@ -16,6 +18,9 @@
         for($i = 1; $i < $size && !$ok; $i++){
             if($selected_val == $list_trains[$i])
                 {
+                    TrainCharac($selected_val, $trainName, $trainValues);
+                   // print_r($trainName);
+                   // print_r($trainValues);
                     $data = select_delays($list_trains[$i], $date);
                     $ok = 1;
                     $train = $i;
@@ -81,10 +86,11 @@ chart.render();
 </form>
 <?php
     if(isset($_POST['NRT']) && $train != 0 || isset($_POST['submit2'])){
+        TrainCharac($list_trains[$train], $trainName, $trainValues);
         echo "<form action='#' method='post'>";
         echo "<select name='date'>";
         for($i = 0; $i <= 29; ++$i){
-            $new_date = date('d/m/Y', strtotime('-'.$i.' day', strtotime($date)));
+            $new_date = date('d/m/Y', strtotime('-'.$i.' day', strtotime($date_def)));
             echo "<option value=".$new_date.">".$new_date."</option>";
         }
         echo "</select>";
@@ -92,15 +98,15 @@ chart.render();
         echo "<input type=submit name=submit2>"."</br>";
         echo "</form>";
         for($i = 1; $i <= 8; $i++){
-            echo $trainName[$train][$i].": ".$trainValues[$train][$i]."</br>";
+            echo $trainName[$i].": ".$trainValues[$i]."</br>";
         }
-        if(strpos($trainValues[$train][5], "destinatie")){
-            echo $trainName[$train][12].": ".$trainValues[$train][12]."</br>";
-            echo $trainName[$train][13].": ".$trainValues[$train][13]."</br>";
+        if(strpos($trainValues[5], "destinatie")){
+            echo $trainName[12].": ".$trainValues[12]."</br>";
+            echo $trainName[13].": ".$trainValues[13]."</br>";
         }
         else{
            for($i = 9; $i <= 13; $i++){
-                    echo $trainName[$train][$i].": ".$trainValues[$train][$i]."</br>";
+                    echo $trainName[$i].": ".$trainValues[$i]."</br>";
                 }
         }
     }

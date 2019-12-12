@@ -41,6 +41,7 @@
         $mod[4] = $aux2;
         $texts[17] = $mod;
 
+
         //RANG FIX
         $texts[5] = preg_replace('/\s+/', '',$texts[5]);
 

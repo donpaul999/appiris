@@ -35,7 +35,7 @@
         $ok = 1;
         foreach ($result as $row){
             //echo $row["ID"].": ".$row["DELAY"];
-            if($row["DATE"] == $date)
+            if($row["DATE"] ==  $date)
                 $ok = 0;
             break;
         }
@@ -44,7 +44,7 @@
             $result = mysqli_query($conectare, $sql);
         }
     }
-    
+
     function select_delays($id, $data){
         global $conectare;
         $txt = $data;
