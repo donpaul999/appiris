@@ -23,4 +23,11 @@
 
     }
 
+    function add_train($train){
+
+        $file = "trains.txt";
+        file_put_contents($file, $train . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+    }
+
 ?>

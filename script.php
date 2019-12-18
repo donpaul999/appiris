@@ -21,7 +21,10 @@
         curl_close($ch);
 
         $tags = explode('<td',$result);
-
+        $index = strpos($result, "Trenul nu este în programul curent de circulație.");
+        if($index != null){
+             throw new Exception('Trenul selectat nu exista in programul curent de circulatie!');
+        }
          foreach ($tags as $tag)
          {
            // get text
@@ -32,33 +35,35 @@
            if (trim($text) != '') $texts[] = $text;
          }
          //DATE FIX
-        $mod = $texts[17];
-        $aux1 = $mod[0];
-        $aux2 = $mod[1];
-        $mod[0] = $mod[3];
-        $mod[1] = $mod[4];
-        $mod[3] = $aux1;
-        $mod[4] = $aux2;
-        $texts[17] = $mod;
-
+         if($texts[17]){
+            $mod = $texts[17];
+            $aux1 = $mod[0];
+            $aux2 = $mod[1];
+            $mod[0] = $mod[3];
+            $mod[1] = $mod[4];
+            $mod[3] = $aux1;
+            $mod[4] = $aux2;
+            $texts[17] = $mod;
+        }
 
         //RANG FIX
         $texts[5] = preg_replace('/\s+/', '',$texts[5]);
+        if(count($texts) > 20){
+            $trainName=["ID", $texts[4], $texts[6], $texts[8], $texts[10], $texts[12], $texts[14], $texts[16], $texts[18]];
+            $trainValues=[$nrTren, $texts[5], $texts[7], $texts[9], $texts[11], $texts[13], $texts[15], $texts[17], $texts[19]];
+            if(strpos($texts[13],"destinatie") != null){
+                 remove_delay($nrTren, $texts[17]);
+                 //echo $nrTren;
+                 array_push($trainName, $texts[20], $texts[21], $texts[22], $texts[23], $texts[24], $texts[26]);
+                 array_push($trainValues, " ", " ", " ", " ", $texts[25], $texts[27]);
 
-        $trainName=["ID", $texts[4], $texts[6], $texts[8], $texts[10], $texts[12], $texts[14], $texts[16], $texts[18]];
-        $trainValues=[$nrTren, $texts[5], $texts[7], $texts[9], $texts[11], $texts[13], $texts[15], $texts[17], $texts[19]];
-        if(strpos($texts[13],"destinatie") != null){
-             remove_delay($nrTren, $texts[17]);
-             //echo $nrTren;
-             array_push($trainName, $texts[20], $texts[21], $texts[22], $texts[23], $texts[24], $texts[26]);
-             array_push($trainValues, " ", " ", " ", " ", $texts[25], $texts[27]);
-
-        }
-        else{
-             //echo $nrTren;
-             add_delay($nrTren, $texts[19], $texts[17]);
-             array_push($trainName, $texts[20], $texts[22], $texts[24], $texts[26], $texts[28], $texts[30]);
-             array_push($trainValues, $texts[21], $texts[23] , $texts[25], $texts[27], $texts[29], $texts[31]);
+            }
+            else{
+                 //echo $nrTren;
+                 add_delay($nrTren, $texts[19], $texts[17], $texts[15]);
+                 array_push($trainName, $texts[20], $texts[22], $texts[24], $texts[26], $texts[28], $texts[30]);
+                 array_push($trainValues, $texts[21], $texts[23] , $texts[25], $texts[27], $texts[29], $texts[31]);
+            }
         }
 
         //print_r($trainName);

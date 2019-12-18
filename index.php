@@ -1,77 +1,55 @@
-<?php
-   require 'run.php';
-   run($trainNames, $trainValues);
-
-?>
-
 <!DOCTYPE html>
-        <html>
-        <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <style type="text/css">
-          html { height: 100% }
-          body { height: 100%; margin: 0; padding: 0 }
-          #map_canvas { height: 100% }
+<html>
+<head>
+<style>
+#map {
+    height: 800px;
+    width: 90%;
+}
+</style>
+<script><!-- will be fixed on next release -->
+    <!-- Include this script if exports does not exists on window or -->
+    <!-- the following error "ReferenceError: exports is not defined" -->
+    <!-- before the cdn import -->
+        var exports = {};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
+<script src="https://unpkg.com/leaflet-drift-marker@1.0.3/lib/DriftMarker/Drift_Marker.js"></script>
+</head>
+<body>
+<div id="map"></div>
+</body>
+<script>
+	 	// We’ll add a tile layer to add to our map, in this case it’s a OSM tile layer.
+	 	// Creating a tile layer usually involves setting the URL template for the tile images
+	 	var osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+	 	    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	 	    osm = L.tileLayer(osmUrl, {
+	 	        maxZoom: 18,
+	 	        attribution: osmAttrib
+	 	    });
 
-          #map-canvas
-        {
-        height: 400px;
-        width: 500px;
-        }
-        </style>
-   </script>
-        <script type="text/javascript">
-        function initialize() {
+	 	// initialize the map on the "map" div with a given center and zoom
+	 	var map = L.map('map').setView([45.9432, 24.9668], 7).addLayer(osm);
 
-            var myLatLng = new google.maps.LatLng( 44.56718739999999, 26.0835113 ),
-                myOptions = {
-                    zoom: 5,
-                    center: myLatLng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                    },
-                map = new google.maps.Map( document.getElementById( 'map-canvas' ), myOptions ),
-                marker = new google.maps.Marker( {icon: {
-                    url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-                    // This marker is 20 pixels wide by 32 pixels high.
-                    size: new google.maps.Size(20, 32),
-                    // The origin for this image is (0, 0).
-                    origin: new google.maps.Point(0, 0),
-                    // The anchor for this image is the base of the flagpole at (0, 32).
-                    anchor: new google.maps.Point(0, 32)
-                }, position: myLatLng, map: map} );
+		var marker = new Drift_Marker([46.566216, 26.894786], {
+	 	        draggable: true,
+	 	        title: "Resource location",
+	 	        alt: "Resource Location",
+	 	        riseOnHover: true
+	 	    }).addTo(map)
+	 	        .bindPopup("test").openPopup();
 
-            marker.setMap( map );
-            moveBus( map, marker );
-
-        }
-
-
-
-        function moveBus( map, marker ) {
-            setTimeout(() => {
-                lat = 44.56718739999999;
-                long = 26.0835113;
-                var position = new google.maps.LatLng(lat, long);
-                marker.setPosition(position);
-                map.panTo( new google.maps.LatLng( 44.56297439999999, 25.9388214 ) );
-             }, 1)
-
-        };
-
-
-        </script>
-        </head>
-        <script id='gm' async defer src="//maps.google.com/maps/api/js?key=KeyQ&region=en-GB&language=en"></script>
-
-        <body onload="initialize()">
-        <script type="text/javascript">
-        moveBus();
-        </script>
-
-
-        <div id="map-canvas" style="height: 500px; width: 500px;"></div>
-
-
-
-        </body>
-        </html>
+	 	// Script for adding marker on map click
+	 	function onMapClick(e) {
+         marker.slideTo(	e.latlng, {
+                duration: 2000
+              });
+	 	}
+	 	map.on('click', onMapClick);
+    marker.slideTo(	[47.003861, 26.886866], {
+      duration: 2000
+    });
+</script>
+</html>
