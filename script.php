@@ -19,11 +19,12 @@
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-
+        $message = "ok";
         $tags = explode('<td',$result);
         $index = strpos($result, "Trenul nu este în programul curent de circulație.");
         if($index != null){
-             throw new Exception('Trenul selectat nu exista in programul curent de circulatie!');
+             $message = 'Trenul selectat nu exista in programul curent de circulatie!';
+             return $message;
         }
          foreach ($tags as $tag)
          {
@@ -69,5 +70,6 @@
         //print_r($trainName);
         //print_r($trainValues);
         //print_r($texts);
+        return $message;
     }
 ?>

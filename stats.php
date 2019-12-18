@@ -19,7 +19,7 @@
             if($selected_val == $list_trains[$i])
                 {
                     $data = select_delays($list_trains[$i], $date);
-                    TrainCharac($selected_val, $trainName, $trainValues);
+                    $t = TrainCharac($selected_val, $trainName, $trainValues);
                    // print_r($trainName);
                    // print_r($trainValues);
                     $ok = 1;
@@ -27,15 +27,14 @@
                 }
         }
         if(!$ok){
-            try{
-                TrainCharac($selected_val, $trainName, $trainValues);
-                array_push($list_trains, $selected_val);
-                add_train($selected_val);
-                echo "Exista date foarte putine pentru acest tren. Reveniti in curand!";
-            }
-            catch(Exception $e) {
-                echo $e->getMessage();
-            }
+                $m = TrainCharac($selected_val, $trainName, $trainValues);
+                if($m == "ok"){
+                    array_push($list_trains, $selected_val);
+                    add_train($selected_val);
+                    echo "Exista date foarte putine pentru acest tren. Reveniti in curand!";
+                }
+                else
+                    echo $m;
          }
     }
 
@@ -51,8 +50,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script>
-	 	//map to be added
 <script>
 
     var data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;

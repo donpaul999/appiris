@@ -6,7 +6,7 @@
             //print_r($list_trains);
             $size = count($list_trains);
             for($i = 1; $i < $size; ++$i){
-                TrainCharac($list_trains[$i], $trainName[$i], $trainValues[$i]);
+                $m = TrainCharac($list_trains[$i], $trainName[$i], $trainValues[$i]);
                 //print_r($trainName);
                 //print_r($trainValues);
                 //echo "****\n";
