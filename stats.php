@@ -55,7 +55,7 @@
     var data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;
     var dpoints = [];
     var title_s = "Intarzieri tren " + "<?php echo $trainValues[1]; ?> "+ "<?php echo $list_trains[$train];?>" ;
-    dpoints.push({x: new Date(data[0].DATE), y:parseInt(data[0].DELAY)});
+    dpoints.push({x: new Date(data[0].DATE), y:data[0].DELAY});
                 //console.log(data[0].DATE, data[0].DELAY);
     for (var i = 1; i < data.length; i++ ) {
          if(data[i].DATE != data[i - 1].DATE){
@@ -133,5 +133,22 @@ chart.render();
 ?>
 <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</br>
+</br>
+<div id="tableOrd">
+    <table>
+    <tbody>
+    <?php
+    for($i = 0; $i < count($data); ++$i){
+    echo"
+     <tr>
+        <td>".$data[$i]["STATION"]."</td>
+        <td>".$data[$i]["DELAY"]."</td>
+     </tr>";
+    }
+    ?>
+    </tbody>
+    </table>
+</div>
 </body>
 </html>

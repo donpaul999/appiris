@@ -3,7 +3,7 @@
     $trainNames = [];
     $trainValues = [];
     while(True) {
-      sleep(60);
       run($trainNames, $trainValues);
+      sleep(60);
     }
 ?>

@@ -6,14 +6,15 @@
        // echo $date."\n";
         $date = strtotime($date);
         //print_r($data);
+        echo $id;
         $size = count($data);
         $list = [];
-        if(!empty($data)){
+        if($size > 0){
             for($i = 0; $i < $size; ++$i){
                 $date1 = strtotime($data[$i]["DATE"]);
                 //echo $date1."\n";
                 //echo "date1: ".$date1," date: ".$date.PHP_EOL;
-               // echo ($date - $date1) / 86400;
+                echo ($date - $date1) / 86400;
                 if(($date - $date1) / 86400 > 30){
                     array_push($list, $data[$i]["ID"]);
                 }
